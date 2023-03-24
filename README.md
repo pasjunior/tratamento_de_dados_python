@@ -15,7 +15,7 @@ Este código é um script Python que lê arquivos de Excel contendo informaçõe
 
 O script começa importando as bibliotecas necessárias e criando uma janela vazia do tkinter. Em seguida, é aberta uma caixa de diálogo para o usuário selecionar os arquivos de Excel contendo as informações dos processos judiciais a serem tratados.
 
-Após selecionar os arquivos, o código utiliza a biblioteca pandas para ler os arquivos e manipular as informações. Para cada arquivo selecionado, é lido a planilha "BASE" e selecionadas as colunas "EMPRESA", "COMPETÊNCIA", "NÚMERO PROCESSO", "PASTA", "NATUREZA", "POLO", "OBJETO", "PROGNÓSTICO PREDOMINANTE", "PEDIDO ATUALIZADO", "PROVÁVEL MÊS ANTERIOR", "PROVÁVEL ATUALIZADO", "MOTIVO DO ENCERRAMENTO", "TIPO", "ADVOGADO EXTERNO", "VALOR ATUALIZAÇÃO PROVÁVEL" e "DATA DISTRIBUIÇÃO".
+Após selecionar os arquivos, o código utiliza a biblioteca pandas para ler os arquivos e manipular as informações. Para cada arquivo selecionado, é lido a planilha "BASE" e selecionadas algumas colunas .
 
 Em seguida, são realizadas algumas operações de formatação de dados, tais como:
 
