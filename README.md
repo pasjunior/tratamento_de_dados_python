@@ -2,31 +2,34 @@
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/pasjunior/tratamento_de_dados_python/blob/main/licence)
 
 # Descrição do projeto
-Este código é um script Python que lê arquivos de Excel contendo informações de processos judiciais e realiza tratamento dessas informações.
+Esse script realiza o tratamento de bases de dados de pedidos e fechamentos, que são fornecidas em formato Excel, com o objetivo de deixá-las em um formato padronizado e pronto para análises.
 
 ## Bibliotecas utilizadas
-* pandas: biblioteca para manipulação de dados em formato de tabela;
-* re: biblioteca para expressões regulares;
-* tkinter: biblioteca para construir interfaces gráficas em Python;
-* os: biblioteca para trabalhar com sistema operacional;
-* locale: biblioteca para formatação de números.
+* pandas: biblioteca para manipulação e análise de dados
+* re: biblioteca para expressões regulares
+* tkinter: biblioteca gráfica para construção de interfaces gráficas
+* time: biblioteca para trabalhar com tempo
+* os: biblioteca para interface com o sistema operacional
+* locale: biblioteca para formatação de números no padrão brasileiro
 
 ## Funcionamento do código
 
-O script começa importando as bibliotecas necessárias e criando uma janela vazia do tkinter. Em seguida, é aberta uma caixa de diálogo para o usuário selecionar os arquivos de Excel contendo as informações dos processos judiciais a serem tratados.
+1. O usuário é solicitado a selecionar os arquivos de pedidos e fechamentos por meio de caixas de diálogo.
 
-Após selecionar os arquivos, o código utiliza a biblioteca pandas para ler os arquivos e manipular as informações. Para cada arquivo selecionado, é lido a planilha "BASE" e selecionadas algumas colunas .
-
-Em seguida, são realizadas algumas operações de formatação de dados, tais como:
-
-conversão de dados para string;
-extração de informações específicas de algumas colunas utilizando expressões regulares;
-formatação de números no padrão brasileiro utilizando a biblioteca locale;
-substituição de valores nulos por zeros em algumas colunas;
-substituição do caractere "-" por "" em algumas colunas;
-conversão do formato da data na coluna "DATA DISTRIBUIÇÃO" de "yyyy-mm-dd" para "dd/mm/yy";
-renomeação das colunas.
-Por fim, o código salva as informações tratadas em um novo arquivo Excel com o nome "_output" adicionado ao final do nome original do arquivo.
+2. Os dados do arquivo de pedidos são lidos e armazenados em um objeto DataFrame do pandas. Em seguida, são feitas as seguintes operações:
+ * A última linha do arquivo é removida, pois geralmente contém informações adicionais que não são relevantes.
+ * A coluna 'Objeto' é limpa de espaços em branco.
+ * É extraída uma chave única para cada processo a partir da coluna 'Pasta_Websijur'.
+ * A coluna 'Criado_Em' é formatada para o padrão brasileiro.
+ * O arquivo é exportado para um novo arquivo Excel.
+3. Os dados dos arquivos de fechamento são lidos e armazenados em um objeto DataFrame do pandas. Em seguida, são feitas as seguintes operações:
+ * Todas as colunas são convertidas para o tipo string para evitar erros de formatação.
+ * É extraída uma chave única para cada processo a partir da coluna 'PASTA'.
+ * Os valores das colunas 'VALOR ATUALIZAÇÃO PROVÁVEL', 'PEDIDO ATUALIZADO', 'PROVÁVEL ATUALIZADO' e 'PROVÁVEL MÊS ANTERIOR' são formatados no padrão brasileiro.
+ * Os valores faltantes nas colunas mencionadas acima são preenchidos com zero.
+ * É realizada uma substituição do caractere '-' por zero nas colunas mencionadas acima.
+ * A coluna 'DATA DISTRIBUIÇÃO' é convertida para o tipo datetime.
+4. O resultado final é um objeto DataFrame do pandas para cada base de dados, que estão prontos para serem utilizados em análises.
 
 # Como utilizar
 Para utilizar este script, é necessário ter o Python e as bibliotecas pandas, tkinter, os e locale instaladas no computador.
