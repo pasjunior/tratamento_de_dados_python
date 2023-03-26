@@ -1,5 +1,4 @@
 # importando bibliotecas
-
 import pandas as pd
 import re
 import tkinter as tk
