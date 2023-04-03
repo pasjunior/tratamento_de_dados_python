@@ -38,9 +38,11 @@ df_pedidos = df_pedidos.drop(df_pedidos.index[-1])
 df_pedidos['Objeto'] = df_pedidos['Objeto'].str.strip()
 df_pedidos['chave'] = df_pedidos['Pasta_Websijur'].str.extract(r'\.(\d+)/')
 df_pedidos['Criado_Em'] = df_pedidos['Criado_Em'].dt.strftime('%d/%m/%y')
+df_pedidos['Numeroprocesso'] = df_pedidos['Numeroprocesso'].astype(str)
 
 # exportando arquivo em excel
-df_pedidos.to_excel('Pedidos.xlsx', sheet_name='Pedidos', index=False)
+#df_pedidos.to_excel('Pedidos.xlsx', sheet_name='Pedidos', index=False)
+df_pedidos.to_parquet('Pedidos.parquet', engine='pyarrow')
 del df_pedidos
 print('Pedidos.xlsx')
 
@@ -75,8 +77,10 @@ for fechamento, nome_arquivo in zip(fechamentos, nome_arquivos_fechamento):
         'DATA DISTRIBUIÇÃO': 'DATA DISTRIBUICAO'
     })
     df_fechamento['NUMERO PROCESSO'] = df_fechamento['NUMERO PROCESSO'].replace(to_replace='\n', value=' ', regex=True)
-    nome_arquivo_saida = os.path.splitext(nome_arquivo)[0] + '_output.xlsx'
-    df_fechamento.to_excel(nome_arquivo, encoding='utf8', sheet_name='BASE', index=False)
+    #nome_arquivo_saida = os.path.splitext(nome_arquivo)[0] + '_output.xlsx'
+    #df_fechamento.to_excel(nome_arquivo, encoding='utf8', sheet_name='BASE', index=False)
+    nome_arquivo_saida = os.path.splitext(nome_arquivo)[0] + '.parquet'
+    df_fechamento.to_parquet(nome_arquivo, engine='pyarrow')
     print(nome_arquivo)
 del df_fechamento
 
